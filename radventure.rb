@@ -35,7 +35,10 @@ class World
   end
   def go(roomID,direction,player)
     destination = getDestination(roomID,direction)
-    player.setRoom(destination)
+    if destination >= 0 then
+      player.setRoom(destination)
+    else puts "You can't go that way"
+    end
   end
 end #World
 
@@ -153,10 +156,10 @@ end
 
 player = Player.new()
 world = World.new()
-myRoom = player.getRoom
 
 while player.playing?
-  puts "=========== Score: #{player.getScore} ====== Room: #{world.getRoomName(myRoom)} ===== Round: #{player.getRound} ======="
+  myRoom = player.getRoom
+  puts "=========== Score: #{player.getScore} ====== Room: #{myRoom} - #{world.getRoomName(myRoom)} ===== Round: #{player.getRound} ======="
   world.showRoom(myRoom)
   action = getInput()
 
