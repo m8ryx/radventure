@@ -29,15 +29,35 @@ class World
   def getStuff(roomID)
     return @stuff[roomID]
   end
+  def getDestination(roomID,direction)
+#    return @roomExits[roomID][direction]
+    return @roomsExits[roomID][direction]
+  end
+  def go(roomID,direction,player)
+    destination = getDestination(roomID,direction)
+    player.setRoom(destination)
+  end
 end #World
 
 class Player
   def initialize()
     @score = 0
+    @round = 0
     @room = 3
+    @inventory = []
+    @playing = true
+    @living = true
   end
   def getRoom()
     return @room
+  end
+  def playing?
+    return @playing
+  end
+  def kill(reason,player)
+    puts reason
+    puts "Bummmer!"
+    stopPlaying(player)
   end
   def setRoom(newRoom)
     @room = newRoom
@@ -45,14 +65,38 @@ class Player
   def getScore()
     return @score
   end
+  def showGameStats
+    puts "Great jorb!  You've accumulated #{getScore} points over #{getRound} rounds."
+  end
+  def getRound
+    return @round
+  end
+  def incrementRound
+    @round = @round + 1
+  end
+  def setScore(newScore)
+    @score = newScore
+  end
+  def addScore(points,player)
+    score = getScore()
+    score = score + points
+    player.setScore(score)
+  end
   def getRoom()
     return @room
+  end
+  def getInventory()
+    return @inventory
+  end
+  def stopPlaying(player)
+    @playing = false
+    player.showGameStats()
   end
 end #Player
 
 class Activity
   def initialize(sentence)
-    @verbs = ['n','s','e','w','u','d','take','get','drop','i','inventory','look']
+    @verbs = ['n','s','e','w','u','d','take','get','drop','i','inventory','look','quit']
     return(sentence)
   end
   def split(sentence)
@@ -86,23 +130,46 @@ class Activity
       return 0
     end
   end
+  def doAction(verb,objects,myRoom,myStuff,roomStuff,myWorld,me)
+    case
+      when verb == "n"
+        myWorld.go(myRoom,0,me)
+      when verb == "s"
+        puts "going south"
+        myWorld.go(myRoom,1,me)
+      when verb == "e"
+        myWorld.go(myRoom,2,me)
+      when verb == "w"
+        myWorld.go(myRoom,3,me)
+      when verb == "u"
+        myWorld.go(myRoom,4,me)
+      when verb == "d"
+        myWorld.go(myRoom,5,me)
+      when verb == "quit"
+        me.stopPlaying(me)
+    end
+  end
 end
-
-
 
 player = Player.new()
 world = World.new()
 myRoom = player.getRoom
 
-puts "=========== Score: #{player.getScore} ======  Room: #{world.getRoomName(myRoom)}========"
-world.showRoom(myRoom)
-action = getInput()
+while player.playing?
+  puts "=========== Score: #{player.getScore} ====== Room: #{world.getRoomName(myRoom)} ===== Round: #{player.getRound} ======="
+  world.showRoom(myRoom)
+  action = getInput()
 
-activity = Activity.new(action)
-puts activity.split(action)
+  activity = Activity.new(action)
+  sentence = activity.split(action)
+  myInventory = player.getInventory()
+  verb = activity.findVerb(sentence.shift())
+  objects = activity.findObject(action,world.getStuff(myRoom))
+  roomStuff = world.getStuff(myRoom)
 
-verb = activity.findVerb(action.shift)
-object = activity.findObject(action,world.getStuff(myRoom))
-puts verb
-puts object
-
+  activity.doAction(verb,objects,myRoom,myInventory,roomStuff,world,player)
+  puts verb
+  #puts object
+#  player.addScore(1,player)
+  player.incrementRound
+end
