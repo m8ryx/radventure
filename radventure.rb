@@ -59,22 +59,17 @@ class Activity
     words = sentence.split(' ')
     return words
   end
-  def findVerb(sentence)
-    theseVerbs = []
-    words = split(sentence)
-    words.each do |word|
-      @verbs.each do |verb|
-        theseVerbs.push(verb) if verb == word
-      end
+  def findVerb(thisVerb)
+    myVerb = ""
+    # this just validates that it's actually a verb!!
+    @verbs.each do |verb|
+      myVerb = thisVerb if verb == thisVerb
     end
-    if theseVerbs.length > 1
-      puts "Only one verb please"
-      return 0
-    elsif theseVerbs.length <1
+    if myVerb == ""
       puts "That's not a verb I recognize"
       return 0
     else
-      return theseVerbs[0]
+      return thisVerb
     end
   end
   def findObject(sentence, stuffHere)
@@ -106,7 +101,7 @@ action = getInput()
 activity = Activity.new(action)
 puts activity.split(action)
 
-verb = activity.findVerb(action)
+verb = activity.findVerb(action.shift)
 object = activity.findObject(action,world.getStuff(myRoom))
 puts verb
 puts object
