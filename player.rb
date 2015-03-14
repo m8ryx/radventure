@@ -6,6 +6,7 @@ class Player
     @inventory = []
     @playing = true
     @living = true
+    @verbose = false
   end
   def getRoom()
     return room(@room)
@@ -92,6 +93,15 @@ class Player
     else
       puts "nothing. nothing at all"
     end
+  end
+  def verbose
+    @verbose = true
+  end
+  def sparse
+    @verbose = false
+  end
+  def verbose?
+    return @verbose
   end
 end
 

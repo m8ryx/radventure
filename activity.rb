@@ -8,7 +8,7 @@ class Activity
     words = sentence.split(' ')
     return words
   end
-  def doAction(verb,objects,room,myStuff,roomStuff,myWorld,player)
+  def doAction(verb,objects,room,myWorld,player)
     case
       when verb == "n"
         myWorld.go(room,0,player)
@@ -23,7 +23,7 @@ class Activity
         myWorld.go(room,4,player)
       when verb == "d"
         myWorld.go(room,5,player)
-      when verb == "quit"
+      when verb == "quit" || verb == "q"
         player.stopPlaying
       when verb == "take" || verb == "get"
         player.takes(objects,room)
@@ -31,13 +31,15 @@ class Activity
         verb == "drop"
         player.drops(objects,room)
       when verb == "inventory" || verb == "i"
-        puts "Taking inventory..."
         player.inventory
       when verb == "look" || verb == "l"
-        puts "looking"
         room.describe
         room.contents
         room.exits
+      when verb == "verbose"
+        player.verbose
+      when verb == "sparse"
+        player.sparse
     end
   end
 end

@@ -15,13 +15,15 @@ player = Player.new()
 world = World.new()
 
 while player.playing?
-  myRoom = player.getRoom
-  whereAmI = world.thisRoom(myRoom)
+  room = player.getRoom
+  whereAmI = world.thisRoom(room)
 
-  puts "=========== Score: #{player.getScore} ====== Room: #{myRoom} - #{whereAmI.name} ===== Round: #{player.getRound} ======="
-#  world.showRoom(myRoom)
-  whereAmI.describe
-  whereAmI.contents()
+  puts "=========== Score: #{player.getScore} ====== Room: #{room} - #{whereAmI.name} ===== Round: #{player.getRound} ======="
+  if !whereAmI.visited? || player.verbose?
+    whereAmI.describe
+    whereAmI.contents()
+    whereAmI.visited
+  end
   action = getInput()
   sentence = Sentence.new(action)
   verb = sentence.verb
@@ -29,14 +31,6 @@ while player.playing?
 
   activity = Activity.new(verb,objects)
 
-  myInventory = player.getInventory()
-#  verb = activity.findVerb(sentence.shift())
-#  objects = activity.findObject(action,whereAmI.contents)
-  roomStuff = whereAmI.contents
-
-  activity.doAction(verb,objects,whereAmI,myInventory,roomStuff,world,player)
-#  puts verb
-  #puts object
-#  player.addScore(1,player)
+  activity.doAction(verb,objects,whereAmI,world,player)
   player.incrementRound
 end

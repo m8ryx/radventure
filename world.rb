@@ -36,12 +36,12 @@ class World
       puts "End end Item add"
     end
   end
-  def showRoom(roomID)
-    puts @roomsName[roomID]
-    puts @roomsDesc[roomID]
-    puts "You see"
-    showStuff(roomID)
-  end
+#  def showRoom(roomID)
+#    puts @roomsName[roomID]
+#    puts @roomsDesc[roomID]
+#    puts "You see"
+#    showStuff(roomID)
+#  end
   def getRoomName(roomID)
     return @roomsName[roomID]
   end

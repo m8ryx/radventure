@@ -4,6 +4,7 @@ class Room
     @name = name
     @description = description
     @exits = exits
+    @visited = false # has the player been here?
     # create the things in the room
     @contents = Array.new
 #    contents.each
@@ -65,6 +66,12 @@ class Room
       end
     end
     return tmpThings
+  end
+  def visited
+    @visited = true
+  end
+  def visited?
+    return @visited
   end
 end
 
