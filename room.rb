@@ -31,6 +31,23 @@ class Room
   def destination(direction)
     return @exits[direction]
   end
+  def gains(thing)
+    @contents.push(thing)
+  end
+  def loses(things)
+    tmpThings = Array.new
+    things.each do |thing|
+#      puts "room losing: -#{thing}-"
+      @contents.each do |item|
+#        puts "Item name: -#{item.name}-"
+        if item.name == thing
+          tmpThings.push(item)
+          @contents.delete_if { |content| content == item }
+        end
+      end
+    end
+    return tmpThings
+  end
 end
 
 

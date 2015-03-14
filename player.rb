@@ -47,9 +47,39 @@ class Player
   def getInventory()
     return @inventory
   end
-  def stopPlaying(player)
+  def drops(objects,room)
+    object.each do |thing|
+      tempThing = @inventory.select { |object| object == "thing" }
+      if tempThing.length > 0 
+        room.gains(thing)
+      else
+        puts "You don't have any #{thing}"
+      end
+    end
+  end
+  def takes(objects,room)
+    tempThings = room.loses(objects)
+    if tempThings.length > 0
+      tempThings.each do |thing|
+        @inventory.push(thing)
+      end
+    else
+      puts "That's not available to take"
+    end
+  end
+  def stopPlaying
     @playing = false
-    player.showGameStats()
+    showGameStats()
+  end
+  def inventory
+    puts "You are carrying..."
+    if @inventory.length > 0
+      @inventory.each do |item|
+        puts item.name
+      end
+    else
+      puts "nothing. nothing at all"
+    end
   end
 end
 
