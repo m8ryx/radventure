@@ -71,6 +71,18 @@ class Player
     @playing = false
     showGameStats()
   end
+  def drops(objects,room)
+    tmpThings = Array.new
+    objects.each do |thing|
+      @inventory.each do |item|
+        if item.name == thing
+          tmpThings.push(item)
+          @inventory.delete_if { |content| content == item }
+          room.gains(item)
+        end
+      end
+    end
+  end
   def inventory
     puts "You are carrying..."
     if @inventory.length > 0

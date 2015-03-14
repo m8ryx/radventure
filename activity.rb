@@ -29,7 +29,7 @@ class Activity
         player.takes(objects,room)
       when
         verb == "drop"
-        me.drops(objects,room)
+        player.drops(objects,room)
       when verb = "inventory" || verb == "i"
         player.inventory
     end
