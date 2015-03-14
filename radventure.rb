@@ -20,16 +20,17 @@ while player.playing?
   puts "=========== Score: #{player.getScore} ====== Room: #{myRoom} - #{whereAmI.name} ===== Round: #{player.getRound} ======="
 #  world.showRoom(myRoom)
   whereAmI.describe
+  whereAmI.contents()
   action = getInput()
 
   activity = Activity.new(action)
   sentence = activity.split(action)
   myInventory = player.getInventory()
   verb = activity.findVerb(sentence.shift())
-  objects = activity.findObject(action,world.getStuff(myRoom))
-  roomStuff = world.getStuff(myRoom)
+  objects = activity.findObject(action,whereAmI.contents)
+  roomStuff = whereAmI.contents
 
-  activity.doAction(verb,objects,myRoom,myInventory,roomStuff,world,player)
+  activity.doAction(verb,objects,whereAmI,myInventory,roomStuff,world,player)
   puts verb
   #puts object
 #  player.addScore(1,player)

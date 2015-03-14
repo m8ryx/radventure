@@ -1,17 +1,28 @@
 class Thing
-  def initialize(name,takeable,points)
-    @myName = name
+#  [name , description, start room, takeable, eatable, drinkable, usable, switchable, wearable
+  def initialize(name, description,takeable,eatable,drinkable, usable, switchable, wearable)
+    @name = name
     @takeable = takeable
-    @points = points
+#    @points = points
+    @description = description
+    @takeable = takeable
+    @eatable = eatable
+    @drinkable = drinkable
+    @usable = usable
+    @switchable = switchable
+    @wearable = wearable
   end
   def take(room,player)
-    if room.hasItem(@myName)
-      room.removeItem(@myName)
-      player.addItem(@myName)
-    elsif player.hasItem(@myName)
+    if room.hasItem(@name)
+      room.removeItem(@name)
+      player.addItem(@name)
+    elsif player.hasItem(@name)
       puts "You already have that!"
     else
       puts "You just can't see it anywhere!"
     end
+  end
+  def name()
+    return @name
   end
 end
