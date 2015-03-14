@@ -1,6 +1,8 @@
 require_relative "world"
 require_relative "player.rb"
 require_relative "activity.rb"
+require_relative "thing.rb"
+require_relative "room.rb"
 
 def getInput
   print "> "
@@ -13,8 +15,11 @@ world = World.new()
 
 while player.playing?
   myRoom = player.getRoom
-  puts "=========== Score: #{player.getScore} ====== Room: #{myRoom} - #{world.getRoomName(myRoom)} ===== Round: #{player.getRound} ======="
-  world.showRoom(myRoom)
+  whereAmI = world.thisRoom(myRoom)
+
+  puts "=========== Score: #{player.getScore} ====== Room: #{myRoom} - #{whereAmI.name} ===== Round: #{player.getRound} ======="
+#  world.showRoom(myRoom)
+  whereAmI.describe
   action = getInput()
 
   activity = Activity.new(action)
