@@ -8,33 +8,6 @@ class Activity
     words = sentence.split(' ')
     return words
   end
-#  def findVerb(thisVerb)
-#    myVerb = ""
-#    # this just validates that it's actually a verb!!
-#    @verbs.each do |verb|
-#      myVerb = thisVerb if verb == thisVerb
-#    end
-#    if myVerb == ""
-#      puts "That's not a verb I recognize"
-#      return 0
-#    else
-#      return thisVerb
-#    end
-#  end
-#  def findObject(sentence, stuffHere)
-#    thisStuff = []
-#    words = split(sentence)
-#    words.each do |word|
-#      stuffHere.each do |stuff|
-#        thisStuff.push(stuff) if word == stuff
-#      end
-#    end
-#    # this is probably not true
-#    if thisStuff.length > 1
-#      puts "Only one object please"
-#      return 0
-#    end
-#  end
   def doAction(verb,objects,room,myStuff,roomStuff,myWorld,player)
     case
       when verb == "n"
