@@ -16,6 +16,14 @@ class Room
     return @name
   end
   def contents
+    return @contents
+  end
+  def look
+    describe
+    showContents
+    exits
+  end
+  def showContents
     if @contents.length > 0 then
       puts "You see..."
       @contents.each do |item|
@@ -53,25 +61,23 @@ class Room
   def gains(thing)
     @contents.push(thing)
   end
-  def loses(things)
-    tmpThings = Array.new
-    things.each do |thing|
-#      puts "room losing: -#{thing}-"
-      @contents.each do |item|
-#        puts "Item name: -#{item.name}-"
-        if item.name == thing
-          tmpThings.push(item)
-          @contents.delete_if { |content| content == item }
-        end
-      end
-    end
-    return tmpThings
+  def loses(thing)
+      @contents.delete_if { |content| content == thing }
   end
   def visited
     @visited = true
   end
   def visited?
     return @visited
+  end
+  def hasItem?(item)
+    @contents.each do |thing|
+      if item == thing
+        return true
+      else
+        return false
+      end
+    end
   end
 end
 

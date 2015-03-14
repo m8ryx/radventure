@@ -22,7 +22,17 @@ class Thing
       puts "You just can't see it anywhere!"
     end
   end
-  def name()
+  def name
     return @name
+  end
+  def wearable?
+    return @wearable
+  end
+  def describe(room,player)
+    if room.hasItem(@name) || player.hasItem(@name)
+      puts @description
+    else
+      puts "You don't see that here!"
+    end
   end
 end

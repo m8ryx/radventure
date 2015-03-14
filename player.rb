@@ -7,6 +7,10 @@ class Player
     @playing = true
     @living = true
     @verbose = false
+    shirt = Thing.new("shirt", "A worn-out T-shirt",true,false,false,false,false,true)
+    trousers = Thing.new("trousers", "a dirty pair of trousers",true,false,false,false,false,true)
+    shoes = Thing.new("Nike's", "some badass Nike's",true,false,false,false,false,true)
+    @wearing = [shirt,trousers,shoes]
   end
   def getRoom()
     return room(@room)
@@ -48,24 +52,14 @@ class Player
   def getInventory()
     return @inventory
   end
-  def drops(objects,room)
-    object.each do |thing|
-      tempThing = @inventory.select { |object| object == "thing" }
-      if tempThing.length > 0 
-        room.gains(thing)
-      else
-        puts "You don't have any #{thing}"
-      end
-    end
-  end
   def takes(objects,room)
-    tempThings = room.loses(objects)
-    if tempThings.length > 0
-      tempThings.each do |thing|
-        @inventory.push(thing)
+    objects.each do |object|
+      if room.hasItem?(object)
+        room.loses(object)
+        @inventory.push(object)
+      else
+        puts "That's not available to take"
       end
-    else
-      puts "That's not available to take"
     end
   end
   def stopPlaying
@@ -74,12 +68,12 @@ class Player
   end
   def drops(objects,room)
     tmpThings = Array.new
-    objects.each do |thing|
+    objects.each do |object|
       @inventory.each do |item|
-        if item.name == thing
-          tmpThings.push(item)
-          @inventory.delete_if { |content| content == item }
-          room.gains(item)
+        if item == object
+          tmpThings.push(object)
+          @inventory.delete_if { |content| content == object }
+          room.gains(object)
         end
       end
     end
@@ -93,6 +87,7 @@ class Player
     else
       puts "nothing. nothing at all"
     end
+    wearing
   end
   def verbose
     @verbose = true
@@ -102,6 +97,30 @@ class Player
   end
   def verbose?
     return @verbose
+  end
+  def wear(item)
+    if player.has(item)
+      if item.wearble?
+        @wearing.push(item)
+      else
+        puts "You can't wear #{item.name}!"
+      end
+    else
+      puts "You need to have that first!"
+    end
+  end
+  def wearing
+    if @wearing.length > 0
+      puts "You are wearing "
+      @wearing.each do |clothes|
+        print "#{clothes.name}, "
+      end
+    else
+      print "You're naked as a babe"
+    end
+  end
+  def has
+    return @wearing + @inventory
   end
 end
 

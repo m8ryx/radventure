@@ -4,10 +4,10 @@ class Activity
     
     #return(sentence)
   end
-  def split(sentence)
-    words = sentence.split(' ')
-    return words
-  end
+#  def split(sentence)
+#    words = sentence.split(' ')
+#    return words
+#  end
   def doAction(verb,objects,room,myWorld,player)
     case
       when verb == "n"
@@ -27,15 +27,19 @@ class Activity
         player.stopPlaying
       when verb == "take" || verb == "get"
         player.takes(objects,room)
-      when
-        verb == "drop"
+      when verb == "drop"
+        puts "dropping"
         player.drops(objects,room)
       when verb == "inventory" || verb == "i"
         player.inventory
       when verb == "look" || verb == "l"
-        room.describe
-        room.contents
-        room.exits
+        if objects.length == 0 # no object - describe room
+          room.look
+        else
+          objects.each do |thing| # describe a thing
+            thing.describe(room,player)
+          end
+        end
       when verb == "verbose"
         player.verbose
       when verb == "sparse"
