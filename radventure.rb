@@ -21,6 +21,7 @@ while player.playing?
   puts "=========== Score: #{player.getScore} ====== Room: #{room} - #{whereAmI.name} ===== Round: #{player.getRound} ======="
   if !whereAmI.visited? || player.verbose?
     whereAmI.look
+    whereAmI.visited
   end
   action = getInput()
   sentence = Sentence.new(action)
