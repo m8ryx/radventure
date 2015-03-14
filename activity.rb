@@ -30,8 +30,14 @@ class Activity
       when
         verb == "drop"
         player.drops(objects,room)
-      when verb = "inventory" || verb == "i"
+      when verb == "inventory" || verb == "i"
+        puts "Taking inventory..."
         player.inventory
+      when verb == "look" || verb == "l"
+        puts "looking"
+        room.describe
+        room.contents
+        room.exits
     end
   end
 end

@@ -31,6 +31,24 @@ class Room
   def destination(direction)
     return @exits[direction]
   end
+  def exits
+    directions = ["north","south","east","west","up","down"]
+    shown = false
+    print "You can go "
+    0.upto(5) do |i|
+      if @exits[i] > -1
+        print ", " if shown
+        print directions[i] 
+        shown = true
+      end
+    end
+    if shown
+      puts "."
+    else
+      puts "nowhere."
+    end
+  end
+
   def gains(thing)
     @contents.push(thing)
   end
