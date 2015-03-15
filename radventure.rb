@@ -1,4 +1,5 @@
 require_relative "world"
+require_relative "game"
 require_relative "player.rb"
 require_relative "activity.rb"
 require_relative "thing.rb"
@@ -13,13 +14,16 @@ end
 
 player = Player.new()
 world = World.new()
+game = Game.new()
 
-while player.playing?
+while game.playing?
   room = player.getRoom
   whereAmI = world.thisRoom(room)
 
-  puts "=========== Score: #{player.getScore} ====== Room: #{room} - #{whereAmI.name} ===== Round: #{player.getRound} ======="
-  if !whereAmI.visited? || player.verbose?
+  puts "======================================================="
+  puts "== Room: #{whereAmI.name} =========== Score: #{game.getScore} ===== Round: #{game.getRound} ======="
+  puts "======================================================="
+  if !whereAmI.visited? || game.verbose?
     whereAmI.look
     whereAmI.visited
   end
@@ -30,6 +34,6 @@ while player.playing?
 
   activity = Activity.new(verb,objects)
 
-  activity.doAction(verb,objects,whereAmI,world,player)
-  player.incrementRound
+  activity.doAction(verb,objects,whereAmI,world,player, game)
+  game.incrementRound
 end

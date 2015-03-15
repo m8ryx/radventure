@@ -1,54 +1,24 @@
 class Player
   def initialize()
-    @score = 0
-    @round = 0
     @room = 3
     @inventory = []
-    @playing = true
     @living = true
-    @verbose = false
     shirt = Thing.new("shirt", "A worn-out T-shirt",true,false,false,false,false,true)
     trousers = Thing.new("trousers", "a dirty pair of trousers",true,false,false,false,false,true)
     shoes = Thing.new("Nike's", "some badass Nike's",true,false,false,false,false,true)
     @wearing = [shirt,trousers,shoes]
   end
   def getRoom()
-    return room(@room)
-  end
-  def playing?
-    return @playing
-  end
-  def kill(reason,player)
-    puts reason
-    puts "Bummmer!"
-    stopPlaying(player)
-    return true
+    return @room
   end
   def setRoom(newRoom)
     @room = newRoom
   end
-  def getScore()
-    return @score
-  end
-  def showGameStats
-    puts "Great jorb!  You've accumulated #{getScore} points over #{getRound} rounds."
-  end
-  def getRound
-    return @round
-  end
-  def incrementRound
-    @round = @round + 1
-  end
-  def setScore(newScore)
-    @score = newScore
-  end
-  def addScore(points)
-    score = getScore()
-    score = score + points
-    setScore(score)
-  end
-  def getRoom()
-    return @room
+  def kill(reason)
+    puts reason
+    puts "Bummmer!"
+    game.stopPlaying(player)
+    return true
   end
   def getInventory()
     return @inventory
@@ -62,10 +32,6 @@ class Player
         puts "That's not available to take"
       end
     end
-  end
-  def stopPlaying
-    @playing = false
-    showGameStats()
   end
   def drops(objects,room)
     tmpThings = Array.new
@@ -89,15 +55,6 @@ class Player
       puts "nothing. nothing at all"
     end
     wearing
-  end
-  def verbose
-    @verbose = true
-  end
-  def sparse
-    @verbose = false
-  end
-  def verbose?
-    return @verbose
   end
   def wear(item)
     if player.has(item)
