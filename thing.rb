@@ -28,7 +28,7 @@ class Thing
     return @wearable
   end
   def describe(room,player)
-    if room.hasItem(@name) || player.hasItem(@name)
+    if room.hasItem?(@name) || player.hasItem?(@name)
       puts @description
     else
       puts "You don't see that here!"

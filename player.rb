@@ -80,5 +80,14 @@ class Player
   def has
     return @wearing + @inventory
   end
+  def hasItem?(item)
+    @inventory.each do |thing|
+      if item == thing
+        return true
+      else
+        return false
+      end
+    end
+  end
 end
 
