@@ -1,7 +1,7 @@
 class World
   def initialize()
     @startRoom = 3
-    @room = Array.new
+    @rooms = Array.new
     @item = Array.new
 #    @roomsName = ['cottage','Dragon Tower', 'south of the tower', 'north of the tower']
 #    @roomsDesc = ["You are inside the cottage.  You can leave to the north or south, or the tower is attached to the east.\nThis room has seen better days.  Dusty furniture lies in varying states of decay and disarray.  Large webs drape the corners, and several dead giant spiders are visible.", "You are inside the dragon's tower.  Maybe not the most awesome place to be.  There are steps running along the permiter of the tower up to the top, some 40 feet above.","You are to the south of the cottage.  You can enter to the north or run away.", "You are to the north of the cottage.  You can enter to the south or run away"]
@@ -16,7 +16,7 @@ class World
 #    @stuff = [['100 gold'],['axe'],['piece of thread','Timbers Jersey'],['pocket lint']]
     id = 0
     @roomsData.each do |room|
-      @room[id] = Room.new(id,@roomsData[id][0],@roomsData[id][1],@roomsData[id][2])
+      @rooms[id] = Room.new(id,@roomsData[id][0],@roomsData[id][1],@roomsData[id][2])
       id = id + 1
     end
     # items: [description, start room, takeable, eatable, drinkable, usable, switchable, wearable]
@@ -31,7 +31,7 @@ class World
       thisRoom = @itemsData[id][0]
       puts "Item ID: #{id} - Room: #{thisRoom}"
       @item[id] = Thing.new(@itemsData[id][1],@itemsData[id][2],@itemsData[id][3],@itemsData[id][4],@itemsData[id][5],@itemsData[id][6],@itemsData[id][7],@itemsData[id][8])
-      @room[thisRoom].contains(@item[id])
+      @rooms[thisRoom].contains(@item[id])
       id = id + 1
       puts "End end Item add"
     end
@@ -53,6 +53,6 @@ class World
     end
   end
   def thisRoom(roomID)
-    return @room[roomID]
+    return @rooms[roomID]
   end
 end #World

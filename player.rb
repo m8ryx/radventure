@@ -22,6 +22,7 @@ class Player
     puts reason
     puts "Bummmer!"
     stopPlaying(player)
+    return true
   end
   def setRoom(newRoom)
     @room = newRoom
@@ -41,10 +42,10 @@ class Player
   def setScore(newScore)
     @score = newScore
   end
-  def addScore(points,player)
+  def addScore(points)
     score = getScore()
     score = score + points
-    player.setScore(score)
+    setScore(score)
   end
   def getRoom()
     return @room

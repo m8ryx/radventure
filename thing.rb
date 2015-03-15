@@ -2,7 +2,6 @@ class Thing
 #  [name , description, start room, takeable, eatable, drinkable, usable, switchable, wearable
   def initialize(name, description,takeable,eatable,drinkable, usable, switchable, wearable)
     @name = name
-    @takeable = takeable
 #    @points = points
     @description = description
     @takeable = takeable
