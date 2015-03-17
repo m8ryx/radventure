@@ -6,79 +6,80 @@ class Room
     @exits = exits
     @visited = false # has the player been here?
     # create the things in the room
-    @contents = Array.new
-#    contents.each
+    @contents = []
   end
+  attr_reader :name
+  attr_reader :contents
+  attr_reader :visited
+  alias_method :visited?, :visited
+
   def describe
     puts @description
   end
-  def name
-    return @name
-  end
-  def contents
-    return @contents
-  end
+
   def look
     describe
-    showContents
+    show_contents
     exits
   end
-  def showContents
-    if @contents.length > 0 then
-      puts "You see..."
+
+  def show_contents
+    if @contents.length > 0
+      puts 'You see...'
       @contents.each do |item|
         puts item.name
       end
     else
-      puts "The room is empty"
+      puts 'The room is empty'
     end
   end
+
   def contains(thing)
     puts "Room: #{@name} - adding: #{thing.name}"
     @contents.push(thing)
   end
+
   def destination(direction)
-    return @exits[direction]
+    @exits[direction]
   end
+
   def exits
-    directions = ["north","south","east","west","up","down"]
+    directions = %w(north south east west up down)
     shown = false
-    print "You can go "
+    print 'You can go '
     0.upto(5) do |i|
       if @exits[i] > -1
-        print ", " if shown
-        print directions[i] 
+        print ', ' if shown
+        print directions[i]
         shown = true
       end
     end
     if shown
-      puts "."
+      puts '.'
     else
-      puts "nowhere."
+      puts 'nowhere.'
     end
   end
 
   def gains(thing)
     @contents.push(thing)
   end
+
   def loses(thing)
-      @contents.delete_if { |content| content == thing }
+    @contents.delete_if { |content| content == thing }
   end
+
   def visited
     @visited = true
   end
-  def visited?
-    return @visited
-  end
-  def hasItem?(item)
+
+  def item?(item)
     @contents.each do |thing|
+      show_contents
       if item == thing
         return true
-      else
-        return false
       end
     end
+    return false
   end
 end
-
-

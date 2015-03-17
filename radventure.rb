@@ -1,39 +1,39 @@
-require_relative "world"
-require_relative "game"
-require_relative "player.rb"
-require_relative "activity.rb"
-require_relative "thing.rb"
-require_relative "room.rb"
-require_relative "sentence.rb"
+require_relative 'world'
+require_relative 'game'
+require_relative 'player.rb'
+require_relative 'activity.rb'
+require_relative 'thing.rb'
+require_relative 'room.rb'
+require_relative 'sentence.rb'
 
-def getInput
-  print "> "
+def get_input
+  print '> '
   choice = $stdin.gets.chomp
-  return choice
+  choice
 end
 
-player = Player.new()
-world = World.new()
-game = Game.new()
+player = Player.new
+world = World.new
+game = Game.new
 
 while game.playing?
-  room = player.getRoom
-  whereAmI = world.thisRoom(room)
+  room = player.room
+  where_am_i = world.this_room(room)
 
-  puts "======================================================="
-  puts "== Room: #{whereAmI.name} =========== Score: #{game.getScore} ===== Round: #{game.getRound} ======="
-  puts "======================================================="
-  if !whereAmI.visited? || game.verbose?
-    whereAmI.look
-    whereAmI.visited
+  puts '======================================================='
+  puts "== Room: #{where_am_i.name} =========== Score: #{game.score} ===== Round: #{game.round} ======="
+  puts '======================================================='
+  if !where_am_i.visited? || game.verbose?
+    where_am_i.look
+    where_am_i.visited
   end
-  action = getInput()
+  action = get_input
   sentence = Sentence.new(action)
   verb = sentence.verb
-  objects = sentence.toObjects(whereAmI,player)
+  objects = sentence.to_objects(where_am_i, player)
 
-  activity = Activity.new(verb,objects)
+  activity = Activity.new
 
-  activity.doAction(verb,objects,whereAmI,world,player, game)
-  game.incrementRound
+  activity.do_action(verb, objects, where_am_i, world, player, game)
+  game.increment_round
 end

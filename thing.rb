@@ -1,8 +1,6 @@
 class Thing
-#  [name , description, start room, takeable, eatable, drinkable, usable, switchable, wearable
-  def initialize(name, description,takeable,eatable,drinkable, usable, switchable, wearable)
+  def initialize(name, description, takeable, eatable, drinkable, usable, switchable, wearable)
     @name = name
-#    @points = points
     @description = description
     @takeable = takeable
     @eatable = eatable
@@ -11,24 +9,23 @@ class Thing
     @switchable = switchable
     @wearable = wearable
   end
-  def take(room,player)
-    if room.hasItem(@name)
-      room.removeItem(@name)
-      player.addItem(@name)
-    elsif player.hasItem(@name)
-      puts "You already have that!"
+  attr_reader :name
+  attr_reader :wearable
+  alias_method :wearable?, :wearable
+
+  def take(room, player)
+    if room.item?(@name)
+      room.remove_item(@name)
+      player.add_item(@name)
+    elsif player.item?(@name)
+      puts 'You already have that!'
     else
       puts "You just can't see it anywhere!"
     end
   end
-  def name
-    return @name
-  end
-  def wearable?
-    return @wearable
-  end
-  def describe(room,player)
-    if room.hasItem?(@name) || player.hasItem?(@name)
+
+  def describe(room, player)
+    if room.item?(@name) || player.item?(@name)
       puts @description
     else
       puts "You don't see that here!"

@@ -4,27 +4,24 @@ class Sentence
     @objects = sentence.split(' ')
     @verb = @objects.shift
   end
-  def verb
-    return @verb
-  end
-  def objects
-    return @objects
-  end
-  def toObjects(room,player)
+  attr_reader :verb
+  attr_reader :objects
+
+  def to_objects(room, player)
     subject = @objects
-    theseObjects = Array.new
+    these_objects = []
     inventory = player.has
-    roomContents = room.contents
-    availableStuff = inventory + roomContents
+    room_contents = room.contents
+    available_stuff = inventory + room_contents
     subject.each do |word|
-      availableStuff.each do |stuff|
+      available_stuff.each do |stuff|
         if word == stuff.name
-          puts "match"
-          theseObjects.push(stuff)
+          puts 'match'
+          these_objects.push(stuff)
         end
       end
     end
-    puts "object: #{theseObjects[0].name}" if theseObjects.length > 0
-    return theseObjects
+    puts "object: #{these_objects[0].name}" if these_objects.length > 0
+    these_objects
   end
 end
