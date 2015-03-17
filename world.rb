@@ -23,11 +23,11 @@ class World
     id = 0
     @items_data.each do |item|
       this_room = item[0]
-      puts "Item ID: #{item} - Room: #{this_room}"
+      # puts "Item ID: #{item} - Room: #{this_room}"
       @item[id] = Thing.new(item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8])
       @rooms[this_room].contains(@item[id])
       id += 1
-      puts 'End end Item add'
+      # puts 'End end Item add'
     end
   end
 

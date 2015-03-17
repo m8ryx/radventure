@@ -69,10 +69,10 @@ class Player
     if @wearing.length > 0
       puts 'You are wearing '
       @wearing.each do |clothes|
-        print "#{clothes.name}, "
+        puts "#{clothes.name}, "
       end
     else
-      print "You're naked as a babe"
+      puts "You're naked as a babe"
     end
   end
 

@@ -34,7 +34,7 @@ class Room
   end
 
   def contains(thing)
-    puts "Room: #{@name} - adding: #{thing.name}"
+    # puts "Room: #{@name} - adding: #{thing.name}"
     @contents.push(thing)
   end
 
@@ -74,6 +74,6 @@ class Room
         return true
       end
     end
-    return false
+    false
   end
 end
