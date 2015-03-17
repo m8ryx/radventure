@@ -41,7 +41,7 @@ class Player
     end
   end
 
-  def inventory
+  def show_inventory
     puts 'You are carrying...'
     if @inventory.length > 0
       @inventory.each do |item|

@@ -3,9 +3,29 @@ class Sentence
     @sentence = sentence
     @objects = sentence.split(' ')
     @verb = @objects.shift
+    remove_articles
   end
   attr_reader :verb
   attr_reader :objects
+
+  def remove_articles
+    articles = %w(the a an)
+    articles.each do |article|
+      @objects.delete_if { |word| word == article }
+    end
+    puts @objects
+  end
+
+  def get_prepositional_phrase
+    prepositions = %w(with on under inside into)
+    @objects.each do |word|
+      prepositions.each do |preposition|
+        if word == preposition
+          puts "Prepostion: #{word}"
+        end
+      end
+    end
+  end
 
   def to_objects(room, player)
     subject = @objects

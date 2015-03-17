@@ -37,7 +37,7 @@ class Activity
         puts 'dropping'
         player.drops(objects, room)
       when verb == 'inventory' || verb == 'i'
-        player.inventory
+        player.show_inventory
       when verb == 'look' || verb == 'l'
         if objects.length == 0 # no object - describe room
           room.look
