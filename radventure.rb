@@ -25,7 +25,7 @@ while game.playing?
   puts '======================================================='
   if !where_am_i.visited? || game.verbose?
     where_am_i.look
-    where_am_i.visited
+    where_am_i.visited = true
   end
   action = get_input
   sentence = Sentence.new(action)

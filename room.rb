@@ -5,12 +5,11 @@ class Room
     @description = description
     @exits = exits
     @visited = false # has the player been here?
-    # create the things in the room
     @contents = []
   end
   attr_reader :name
   attr_reader :contents
-  attr_reader :visited
+  attr_accessor :visited
   alias_method :visited?, :visited
 
   def describe
@@ -69,13 +68,8 @@ class Room
     @contents.delete_if { |content| content == thing }
   end
 
-  def visited
-    @visited = true
-  end
-
   def item?(item)
     @contents.each do |thing|
-      show_contents
       if item == thing
         return true
       end
