@@ -30,7 +30,7 @@ while game.playing?
   action = get_input
   sentence = Sentence.new(action)
   verb = sentence.verb
-  prepositional_phrase = sentence.get_prepositional_phrase
+  prepositional_phrase = sentence.get_prepositional_phrase(where_am_i, player)
   objects = sentence.to_objects(where_am_i, player)
 
   activity = Activity.new

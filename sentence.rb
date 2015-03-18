@@ -16,13 +16,24 @@ class Sentence
     puts @objects
   end
 
-  def get_prepositional_phrase
+  def get_prepositional_phrase(room, player)
+    indirect_object = 0
     prepositions = %w(with on under inside into)
-    @objects.each do |word|
-      prepositions.each do |preposition|
+    @objects.each_with_index do |word, index|
+    prepositions.each do |preposition|
         if word == preposition
           puts "Prepostion: #{word}"
+          indirect_object = index + 1
         end
+      end
+    end
+    # assumiing that the word(s) immediately after the preposition are the indirect object
+    inventory = player.has
+    room_contents = room.contents
+    available_stuff = inventory + room_contents
+    available_stuff.each do |stuff|
+      if @objects[indirect_object] == stuff.name
+         return stuff
       end
     end
   end
