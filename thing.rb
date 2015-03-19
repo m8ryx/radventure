@@ -1,5 +1,12 @@
 class Thing
-  def initialize(name, description, takeable, eatable, drinkable, usable, switchable, wearable)
+  def initialize(name,
+                 description,
+                 takeable,
+                 eatable,
+                 drinkable,
+                 usable,
+                 switchable,
+                 wearable)
     @name = name
     @description = description
     @takeable = takeable

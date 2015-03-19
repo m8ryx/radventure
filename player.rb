@@ -53,15 +53,27 @@ class Player
     wearing
   end
 
-  def wear(item)
-    if player.has(item)
-      if item.wearble?
-        @wearing.push(item)
+  def wears(items)
+    items.each do |item|
+      if carrying?(item)
+        if item.wearable?
+          @wearing.push(item)
+          @inventory.delete_if { |clothes| clothes.name == item.name }
+        else
+          puts "You can't wear #{item.name}!"
+        end
       else
-        puts "You can't wear #{item.name}!"
+        puts 'You need to have that first!'
       end
-    else
-      puts 'You need to have that first!'
+    end
+  end
+
+  def removes(items)
+    items.each do |item|
+      if wearing?(item)
+        @wearing.delete_if { |clothes| clothes.name == item.name }
+        @inventory.push(item)
+      end
     end
   end
 
@@ -69,15 +81,29 @@ class Player
     if @wearing.length > 0
       puts 'You are wearing '
       @wearing.each do |clothes|
-        puts "#{clothes.name}, "
+        puts "#{clothes.name}"
       end
     else
       puts "You're naked as a babe"
     end
   end
 
+  def wearing?(item)
+    @wearing.each do |clothes|
+      return true if item.name == clothes.name
+    end
+    return false
+  end
+
   def has
     @wearing + @inventory
+  end
+
+  def carrying?(item)
+    @inventory.each do |thing|
+      return true if item == thing
+    end
+    return false
   end
 
   def item?(item)

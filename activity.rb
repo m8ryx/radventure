@@ -46,6 +46,10 @@ class Activity
             thing.describe(room, player)
           end
         end
+      when verb == 'wear'
+        player.wears(objects)
+      when verb == 'remove'
+        player.removes(objects)
       when verb == 'verbose'
         game.verbose = true
       when verb == 'sparse'
