@@ -13,17 +13,8 @@ class Container
 #  end
 
   def to_s
-    number_of_things = @inventory.length - 1
-    @inventory.each_with_index do |thing, i|
-      print "#{thing.name}"
-      if i == number_of_things - 1
-        print ", and "
-      elsif i == number_of_things
-        puts ".  "
-      else print ", "
-      end
-    end
-    print "\n"
+    output = Output.new(@inventory)
+    return output.list_to_phrase('nothing')
   end
 
   def has?(item)

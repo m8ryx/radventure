@@ -44,9 +44,9 @@ class Player
 
   def show_inventory
     print 'You are carrying...'
-    @pocket.to_s
+    puts @pocket.to_s
     print 'You are wearing...'
-    @body.to_s
+    puts @body.to_s
   end
 
   def wears(items)
