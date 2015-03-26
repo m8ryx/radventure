@@ -10,8 +10,10 @@ class Output
     if elements > 0
       for i in 0..top_index
         phrase += @list[i].to_s
-        if i < top_index - 1
+        if ( i < top_index - 1 && elements != 2 )
           phrase += ', '
+        elsif ( i <= top_index - 1 && elements == 2 )
+          phrase += ' and '
         elsif i == top_index - 1
           phrase += ', and '
         else phrase += '.  '
