@@ -22,12 +22,13 @@ class Room
   def look
     describe
     show_contents
-    exits
+    puts exits
   end
 
   def show_contents
-    print "You see..."
-    @contents.to_s
+    output = Output.new(contents)
+    visible_items = output.list_to_phrase('nothing')
+    puts "You see #{visible_items}"
   end
 
   def contains(thing)
@@ -41,20 +42,16 @@ class Room
 
   def exits
     directions = %w(north south east west up down)
-    shown = false
-    print 'You can go '
+    my_exits = Array.new()
     0.upto(5) do |i|
       if @exits[i] > -1
-        print ', ' if shown
-        print directions[i]
-        shown = true
+        my_exits.push(directions[i])
       end
     end
-    if shown
-      puts '.'
-    else
-      puts 'nowhere.'
-    end
+    ways_out = Output.new(my_exits)
+    exits = "You can go "
+    exits += ways_out.list_to_phrase('nowhere')
+    return exits
   end
 
   def gains(thing)

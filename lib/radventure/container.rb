@@ -8,6 +8,10 @@ class Container
     @inventory
   end
 
+#  def push(item)
+#    @inventory = [@inventory, item]
+#  end
+
   def to_s
     number_of_things = @inventory.length - 1
     @inventory.each_with_index do |thing, i|

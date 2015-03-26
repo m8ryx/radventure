@@ -1,3 +1,4 @@
+require 'radventure/output'
 require 'radventure/world'
 require 'radventure/game'
 require 'radventure/container'

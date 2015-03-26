@@ -20,16 +20,20 @@ class Thing
   attr_reader :wearable
   alias_method :wearable?, :wearable
 
-  def take(room, player)
-    if room.item?(@name)
-      room.remove_item(@name)
-      player.add_item(@name)
-    elsif player.item?(@name)
-      puts 'You already have that!'
-    else
-      puts "You just can't see it anywhere!"
-    end
+  def to_s
+    name
   end
+
+#  def take(room, player)
+#    if room.item?(@name)
+#      room.remove_item(@name)
+#      player.add_item(@name)
+#    elsif player.item?(@name)
+#      puts 'You already have that!'
+#    else
+#      puts "You just can't see it anywhere!"
+#    end
+#  end
 
   def describe(room, player)
     if room.item?(@name) || player.item?(@name)
