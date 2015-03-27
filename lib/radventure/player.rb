@@ -103,13 +103,11 @@ class Player
 #    return false
 #  end
 
-#  def item?(item)
-#    @inventory.each do |thing|
-#      if item == thing
-#        true
-#      else
-#        false
-#      end
-#    end
-#  end
+  def item?(item)
+    if @pocket.has?(item) || @body.has?(item)
+      true
+    else
+      false
+    end
+  end
 end

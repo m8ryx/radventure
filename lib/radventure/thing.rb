@@ -21,7 +21,7 @@ class Thing
   alias_method :wearable?, :wearable
 
   def to_s
-    name
+    @name
   end
 
 #  def take(room, player)
@@ -36,10 +36,10 @@ class Thing
 #  end
 
   def describe(room, player)
-    if room.item?(@name) || player.item?(@name)
-      puts @description
+    if room.item?(self) || player.item?(self)
+      @description
     else
-      puts "You don't see that here!"
+      return "You don't see that here!"
     end
   end
 end

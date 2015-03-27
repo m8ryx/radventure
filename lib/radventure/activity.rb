@@ -43,7 +43,7 @@ class Activity
           room.look
         else
           objects.each do |thing| # describe a thing
-            thing.describe(room, player)
+            puts thing.describe(room, player)
           end
         end
       when verb == 'wear'
