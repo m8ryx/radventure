@@ -1,5 +1,6 @@
 require 'radventure/output'
 require 'radventure/world'
+require 'radventure/serialize'
 require 'radventure/game'
 require 'radventure/container'
 require 'radventure/player'
@@ -7,6 +8,8 @@ require 'radventure/activity'
 require 'radventure/thing'
 require 'radventure/room'
 require 'radventure/sentence'
+require 'yaml'
+require 'awesome_print' # pretty print objects for debugging
 
 def get_input
   print '> '

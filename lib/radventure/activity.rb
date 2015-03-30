@@ -11,21 +11,21 @@ class Activity
   def initialize
   end
 
-  def do_action(verb, objects, room, my_world, player, game)
+  def do_action(verb, objects, room, world, player, game)
     case
       when verb == 'n'
-        my_world.go(room, 0, player)
+        world.go(room, 0, player)
       when verb == 's'
         puts 'going south'
-        my_world.go(room, 1, player)
+        world.go(room, 1, player)
       when verb == 'e'
-        my_world.go(room, 2, player)
+        world.go(room, 2, player)
       when verb == 'w'
-        my_world.go(room, 3, player)
+        world.go(room, 3, player)
       when verb == 'u'
-        my_world.go(room, 4, player)
+        world.go(room, 4, player)
       when verb == 'd'
-        my_world.go(room, 5, player)
+        world.go(room, 5, player)
       when verb == 'quit' || verb == 'q'
         game.stop_playing
       when verb == 'take' || verb == 'get'
@@ -54,6 +54,15 @@ class Activity
         game.verbose = true
       when verb == 'sparse'
         game.verbose = false
+      when verb == 'save'
+        game.save('/tmp/radventure.save', game, world, player)
+      when verb == 'load'
+        array = []
+        array = load('/tmp/radventure.save')
+        game = (array[0])
+        world.initialize(array[1])
+        player.initialize(array[2])
+
     end
   end
 end

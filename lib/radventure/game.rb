@@ -13,7 +13,6 @@ class Game
     @score = 0
     @verbose = false
     @playing = true
-    @round = 0
   end
 
   def show_game_stats
@@ -27,5 +26,35 @@ class Game
   def stop_playing
     @playing = false
     show_game_stats
+  end
+
+  def rebuild(round, score, verbose, playing)
+    @round = round
+    @score = score
+    @verbose = verbose
+    @playing = playing
+  end
+
+  def save(file, game, world, player)
+    save_objects = Serialize.new(game, world, player)
+    puts "---------- Save Objects ---------"
+    ap save_objects
+#    serialized = YAML::dump([ game, world, player ])
+#    puts YAML::dump(serialized)
+#    ap serialized
+    savefile = File.open( file, 'w' )
+    [game, world, player].each do |object|
+      savefile.puts YAML::dump(object)
+      savefile.puts ""
+    end
+  end
+
+  def load(file)
+    array = []
+    $/ = "\n\n" # separate on two newlines
+    File.open( file, 'r' ).each do |object|
+      array << YAML::load([ object ])
+    end
+    return game, world, player
   end
 end
