@@ -1,20 +1,15 @@
 class Thing
   def initialize(name,
                  description,
-                 takeable,
-                 eatable,
-                 drinkable,
-                 usable,
-                 switchable,
-                 wearable)
+                 attributes)
     @name = name
     @description = description
-    @takeable = takeable
-    @eatable = eatable
-    @drinkable = drinkable
-    @usable = usable
-    @switchable = switchable
-    @wearable = wearable
+    @takeable = attributes['takeable'] || false
+    @eatable = attributes['eatable'] || false
+    @drinkable = attributes['drinkable'] || false
+    @usable = attributes['usable'] || false
+    @switchable = attributes['switchable'] || false
+    @wearable = attributes['wearable'] || false
   end
   attr_reader :name
   attr_reader :wearable

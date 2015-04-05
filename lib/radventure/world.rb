@@ -15,16 +15,16 @@ class World
     end
     # items: [description, start room, takeable, eatable, drinkable, usable, switchable, wearable]
     @items_data = []
-    @items_data.push([0, '100gold', 'some shiny bits', true, false, false, false, false, false])
-    @items_data.push([1, 'axe', "A dull axe.  Engraved with words: don't be crazy", true, false, false, true, false, false])
-    @items_data.push([2, 'piece of thread', 'useful for sewing buttons', true, false, false, true, false, false])
-    @items_data.push([2, 'Timbers Jersey', 'The jersey of a great squad. RCTID', true, false, false, false, false, true])
-    @items_data.push([3, 'pocket lint', 'Useful for hitchhiking', true, false, false, false, false, true])
+    @items_data.push([0, '100gold', 'some shiny bits', {'takeable' => true }])
+    @items_data.push([1, 'axe', "A dull axe.  Engraved with words: don't be crazy", {'takeable' => true}])
+    @items_data.push([2, 'piece of thread', 'useful for sewing buttons', {'takeable' => true}])
+    @items_data.push([2, 'Timbers Jersey', 'The jersey of a great squad. RCTID', {'takeable' => true, 'wearable' => true }])
+    @items_data.push([3, 'pocket lint', 'Useful for hitchhiking', {'takeable' => true}])
     id = 0
     @items_data.each do |item|
       this_room = item[0]
       # puts "Item ID: #{item} - Room: #{this_room}"
-      @item[id] = Thing.new(item[1], item[2], item[3], item[4], item[5], item[6], item[7], item[8])
+      @item[id] = Thing.new(item[1], item[2], item[3])
       @rooms[this_room].contains(@item[id])
       id += 1
       # puts 'End end Item add'
