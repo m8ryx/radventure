@@ -4,10 +4,10 @@ class World
     @rooms = []
     @item = []
     @rooms_data = []
-    @rooms_data.push(['cottage', 'You are inside the cottage.  You can leave to the north or south, or the tower is attached to the east.\nThis room has seen better days.  Dusty furniture lies in varying states of decay and disarray.  Large webs drape the corners, and several dead giant spiders are visible.', [3, 2, 1, -1, -1, -1]])
-    @rooms_data.push(['Dragon Tower', 'You are inside the dragon\'s tower.  Maybe not the most awesome place to be.  There are steps running along the perimiter of the tower up to the top, some 40 feet above.', [-1, -1, -1, 0, -1, -1]])
-    @rooms_data.push(['South of the cottage', 'You are to the south of the cottage.  You can enter to the north or run away.', [0, -1, -1, -1, -1, -1]])
-    @rooms_data.push(['North of cottage', 'You are to the north of the cottage.  You can enter to the south or run away', [-1, 0, -1, -1, -1, -1]])
+    @rooms_data.push(['cottage', 'You are inside the cottage.  You can leave to the north or south, or the tower is attached to the east.\nThis room has seen better days.  Dusty furniture lies in varying states of decay and disarray.  Large webs drape the corners, and several dead giant spiders are visible.', { 'north' => 3, 'south' => 2, 'east' => 1 }])
+    @rooms_data.push(['Dragon Tower', 'You are inside the dragon\'s tower.  Maybe not the most awesome place to be.  There are steps running along the perimiter of the tower up to the top, some 40 feet above.', { 'west' => 0 }])
+    @rooms_data.push(['South of the cottage', 'You are to the south of the cottage.  You can enter to the north or run away.', { 'north' => 0 }])
+    @rooms_data.push(['North of cottage', 'You are to the north of the cottage.  You can enter to the south or run away', { 'south' => 0 }])
     id = 0
     @rooms_data.each do |room|
       @rooms[id] = Room.new(id, room[0], room[1], room[2])
@@ -37,7 +37,7 @@ class World
 
   def go(room, direction, player)
     destination = room.destination(direction)
-    if destination >= 0
+    if destination 
       player.room = destination
     else puts "You can't go that way"
     end

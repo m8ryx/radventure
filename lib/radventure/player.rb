@@ -4,9 +4,9 @@ class Player
     @pocket = Container.new # for inventory
     @body = Container.new   # for clothing
     @living = true
-    shirt = Thing.new('shirt', 'A worn-out T-shirt', { 'takeable' => true })
-    trousers = Thing.new('trousers', 'a dirty pair of trousers', { 'takeable' => true })
-    shoes = Thing.new('Nikes', 'some badass Nikes', { 'takeable' => true })
+    shirt = Thing.new('shirt', 'A worn-out T-shirt', { 'takeable' => true, 'wearable' => true })
+    trousers = Thing.new('trousers', 'a dirty pair of trousers', { 'takeable' => true, 'wearable' => true })
+    shoes = Thing.new('Nikes', 'some badass Nikes', { 'takeable' => true, 'wearable' => true })
 #    @wearing = [shirt, trousers, shoes]
     @body.gets(shirt)
     @body.gets(trousers)

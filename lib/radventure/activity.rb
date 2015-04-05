@@ -14,18 +14,18 @@ class Activity
   def do_action(verb, objects, room, world, player, game)
     case
       when verb == 'n'
-        world.go(room, 0, player)
+        world.go(room, 'north', player)
       when verb == 's'
         puts 'going south'
-        world.go(room, 1, player)
+        world.go(room, 'south', player)
       when verb == 'e'
-        world.go(room, 2, player)
+        world.go(room, 'east', player)
       when verb == 'w'
-        world.go(room, 3, player)
+        world.go(room, 'west', player)
       when verb == 'u'
-        world.go(room, 4, player)
+        world.go(room, 'up', player)
       when verb == 'd'
-        world.go(room, 5, player)
+        world.go(room, 'down', player)
       when verb == 'quit' || verb == 'q'
         game.stop_playing
       when verb == 'take' || verb == 'get'

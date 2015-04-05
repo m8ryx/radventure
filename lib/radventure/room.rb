@@ -41,11 +41,16 @@ class Room
   end
 
   def exits
-    directions = %w(north south east west up down)
+#    directions = %w(north south east west up down northeast southeast northwest southwest)
     my_exits = Array.new()
-    0.upto(5) do |i|
-      if @exits[i] > -1
-        my_exits.push(directions[i])
+    #0.upto(5) do |i|
+    #  if @exits[i] > -1
+    #    my_exits.push(directions[i])
+    #  end
+    #end
+    @exits.each do |k,v|
+      if v != -1
+        my_exits.push(k)
       end
     end
     ways_out = Output.new(my_exits)
