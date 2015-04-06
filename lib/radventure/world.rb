@@ -37,7 +37,7 @@ class World
 
   def go(room, direction, player)
     destination = room.destination(direction)
-    if destination 
+    if destination
       player.room = destination
     else puts "You can't go that way"
     end
