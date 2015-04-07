@@ -12,7 +12,7 @@ class World
     id = 0
     @rooms_data.each do |room|
       @rooms[id] = Room.new(id, room[0], room[1], room[2])
-#      @world_nouns.push(room[1])
+      @world_nouns.push(room[0])
       id += 1
     end
     # items: [start room, identifier, description, {attributes}]
@@ -27,8 +27,8 @@ class World
       this_room = item[0]
       # puts "Item ID: #{item} - Room: #{this_room}"
       @item[id] = Thing.new(item[1], item[2], item[3])
-#      @world_nouns.push(@item[id][0])
-      @rooms[this_room].contains(item[1])
+      @world_nouns.push(item[1])
+      @rooms[this_room].contains(@item[id])
       id += 1
       # puts 'End end Item add'
     end
