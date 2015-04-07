@@ -37,17 +37,12 @@ class Room
   end
 
   def destination(direction)
-    @exits[direction]
+    return @exits[direction] if @exits[direction]
+    return nil
   end
 
   def exits
-#    directions = %w(north south east west up down northeast southeast northwest southwest)
     my_exits = Array.new()
-    #0.upto(5) do |i|
-    #  if @exits[i] > -1
-    #    my_exits.push(directions[i])
-    #  end
-    #end
     @exits.each do |k,v|
       if v != -1
         my_exits.push(k)
@@ -57,6 +52,10 @@ class Room
     exits = "You can go "
     exits += ways_out.list_to_phrase('nowhere')
     return exits
+  end
+
+  def add_exit(direction, destination)
+    @exits[direction] = destination
   end
 
   def gains(thing)

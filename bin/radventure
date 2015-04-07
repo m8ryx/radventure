@@ -1,3 +1,3 @@
 #!/usr/bin/env ruby
 
-require 'radventure'
+require_relative '../lib/radventure'
